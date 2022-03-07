@@ -4,20 +4,26 @@ import { useEffect, useState } from 'react';
 import client from '../graphql/client';
 import GET_POKEMONS from '../graphql/queries/getPokemons';
 import Template from '../templates/Home';
+import { pokemons } from '../utils/constants/pokemons';
+import { startEndTime } from '../utils/functions/startEndTime';
 
-type PokemonListType = {
-  pokemon_v2_pokemonspeciesname: {
-    name: string;
-    id: string;
-  }[];
+type HomeProps = {
+  pokemonOfTheDay: string;
 };
 
-const Home = ({ pokemons }: any) => {
+const Home = ({ pokemonOfTheDay }: HomeProps) => {
   const [data, setData] = useState({});
-
+  const [word, setWord] = useState<string>(pokemonOfTheDay);
+  console.log(word, 'word');
   useEffect(() => {
     const dataLocalStorage = localStorage.getItem('data');
-    if (dataLocalStorage) setData(JSON.parse(dataLocalStorage));
+    const dataLocalStorageParsed = JSON.parse(dataLocalStorage as string);
+
+    const { end } = startEndTime();
+
+    if (Date.now() >= end) {
+      setData({ stats: dataLocalStorageParsed.stats });
+    } else if (dataLocalStorage) setData(dataLocalStorageParsed);
   }, []);
 
   useEffect(() => {
@@ -29,21 +35,25 @@ const Home = ({ pokemons }: any) => {
       const eita = await axios.post('http://localhost:3333/pokemon', pokemons);
     } catch (e) {}
   };
-  return <Template data={data} setData={setData} />;
+  return (
+    <Template
+      data={data}
+      setData={setData}
+      word={word.toUpperCase().split('')}
+    />
+  );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { pokemon_v2_pokemonspeciesname }: PokemonListType =
-    await client.request(GET_POKEMONS, {
-      language_id: { _eq: 9 },
-    });
-
-  const pokemons = pokemon_v2_pokemonspeciesname?.filter(
-    ({ name }) => name.length === 7
-  );
+  let pokemonOfTheDay;
+  try {
+    pokemonOfTheDay = await axios.get('http://localhost:3333/pokemon');
+  } catch (e) {
+    console.log('Algo deu errado!');
+  }
 
   return {
-    props: { pokemons },
+    props: { pokemonOfTheDay: pokemonOfTheDay?.data || 'a' },
   };
 };
 

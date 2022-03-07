@@ -13,12 +13,12 @@ type DataType = {
 };
 
 type HomeProps = {
-  word?: string[];
+  word: string[];
   data: any;
   setData: any;
 };
 
-const Home = ({ word = 'MACHAMP'.split(''), data, setData }: HomeProps) => {
+const Home = ({ word, data, setData }: HomeProps) => {
   const [states, setStates] = useState([
     'writable',
     'hidden',
@@ -28,24 +28,24 @@ const Home = ({ word = 'MACHAMP'.split(''), data, setData }: HomeProps) => {
     'hidden',
     'hidden',
   ]);
-  const [control, setControl] = useState({ over: false, win: false });
   const [stats, setStats] = useState([
     { title: 'jogos', data: 0 },
     { title: 'vitórias', data: 0 },
     { title: 'melhor sequência', data: 0 },
   ]);
+  const [control, setControl] = useState({ over: false, win: false });
   const [test, setTest] = useState('');
   const [values, setValues] = useState<string[]>([]);
   const [open, setOpen] = useState(false);
-  const closeModal = () => setOpen(false);
-  const openModal = () => setOpen(true);
   const [attemptValues, setAttemptValues] = useState<AttemptLettersType[][]>(
     []
   );
   const [dataHandler, setDataHandler] = useState(false);
 
+  const closeModal = () => setOpen(false);
+  const openModal = () => setOpen(true);
+
   useEffect(() => {
-    console.log(data?.stats, 'ah ai tu fode');
     setAttemptValues((prevState) => data?.attemptValues || prevState);
     setStates((prevState) => data?.states || prevState);
     setControl((prevState) => data?.control || prevState);
@@ -92,7 +92,6 @@ const Home = ({ word = 'MACHAMP'.split(''), data, setData }: HomeProps) => {
         const bestSequence = { ...prevState[2] };
         wins.data += 1;
         games.data += 1;
-        bestSequence.data += 1;
         if (wins.data > bestSequence.data) {
           bestSequence.data = wins.data;
         }
@@ -132,10 +131,6 @@ const Home = ({ word = 'MACHAMP'.split(''), data, setData }: HomeProps) => {
       openModal();
     }
   }, [control]);
-
-  useEffect(() => {
-    console.log(stats, 'stats');
-  }, [stats]);
 
   useEffect(() => {
     setData({
