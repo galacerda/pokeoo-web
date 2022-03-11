@@ -7,8 +7,8 @@ const enter = '/img/enter.svg';
 const backspace = '/img/backspace.svg';
 
 const Keyboard = () => {
-  const { setLetter, letter } = useKeyboard();
-  console.log(letter, 'pimba');
+  const { setLetter } = useKeyboard();
+
   const renderNameKey = (key: string) => {
     if (key === 'Enter') {
       return <img src={enter} />;

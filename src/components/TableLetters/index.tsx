@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction, useRef, useState } from 'react';
-import { KeyboardProvider } from '../../providers/keyboard';
 import AttemptLetters, { AttemptLettersType } from '../AttemptLetters';
 import WritableLetters from '../WritableLetters';
 import * as S from './styled';

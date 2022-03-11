@@ -34,7 +34,6 @@ const DataProvider = ({ children }: DataProvider) => {
 
   useEffect(() => {
     const dataLocalStorage = localStorage.getItem('data');
-    console.log(dataLocalStorage);
 
     if (dataLocalStorage) {
       const dataLocalStorageParsed = JSON.parse(dataLocalStorage as string);
@@ -53,7 +52,6 @@ const DataProvider = ({ children }: DataProvider) => {
 
   useEffect(() => {
     if (!firstRender) {
-      console.log('aaa');
       setItemsAtLocalStorage(attemptValues, states, control, stats);
     } else setFirstRender(false);
   }, [attemptValues, states, control, stats]);

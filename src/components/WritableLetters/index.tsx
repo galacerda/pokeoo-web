@@ -1,15 +1,7 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useData } from '../../providers/data';
 import { useKeyboard } from '../../providers/keyboard';
 import { pokemons } from '../../utils/constants/pokemons';
-import { setItemsAtLocalStorage } from '../../utils/functions/setItemnsAtLocalStorage';
 import { AttemptLettersType } from '../AttemptLetters';
 import * as S from './styled';
 
@@ -22,17 +14,8 @@ type WritableLettersProps = {
 
 const WritableLetters = ({ index, word }: WritableLettersProps) => {
   const { letter, setLetter } = useKeyboard();
-  console.log(letter, 'letter');
-  const {
-    setAttemptValues,
-    setStats,
-    setControl,
-    setStates,
-    attemptValues,
-    states,
-    control,
-    stats,
-  } = useData();
+
+  const { setAttemptValues, setStats, setControl, setStates } = useData();
   const [values, setValues] = useState<string[]>([]);
   const [activeLetter, setActiveLetter] = useState(0);
   const [key, setKey] = useState('');
@@ -63,19 +46,19 @@ const WritableLetters = ({ index, word }: WritableLettersProps) => {
 
     const copyWord = [...word];
 
-    values.forEach((letter, index) => {
+    values.forEach((letterValue, index) => {
       let status = 'nonexist';
       index = index - decrementIndex;
-      if (copyWord.includes(letter)) {
-        if (copyWord.indexOf(letter) === index) {
+      if (copyWord.includes(letterValue)) {
+        if (copyWord.indexOf(letterValue) === index) {
           status = 'right';
         } else {
           status = 'exist';
         }
-        copyWord.splice(copyWord.indexOf(letter), 1);
+        copyWord.splice(copyWord.indexOf(letterValue), 1);
         decrementIndex += 1;
       }
-      attempt.push({ letter, status });
+      attempt.push({ letter: letterValue, status });
     });
 
     setAttemptValues((prevState: any) => {
@@ -147,7 +130,7 @@ const WritableLetters = ({ index, word }: WritableLettersProps) => {
         });
         return null;
       }
-      console.log(value, 'value');
+
       if (value === 'ArrowRight' && activeLetter < 6)
         setActiveLetter(activeLetter + 1);
       if (value === 'ArrowLeft' && activeLetter > 0)
@@ -163,6 +146,7 @@ const WritableLetters = ({ index, word }: WritableLettersProps) => {
   }, [key]);
 
   useEffect(() => {
+    console.log('entrou aqui');
     setLetter('');
     handleChange(letter);
   }, [letter]);

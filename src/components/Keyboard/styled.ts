@@ -2,7 +2,7 @@ import { transparentize } from 'polished';
 import styled, { css } from 'styled-components';
 import { defaultTheme } from '../../styles/defaultTheme';
 
-export const Box = styled.button`
+export const Box = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

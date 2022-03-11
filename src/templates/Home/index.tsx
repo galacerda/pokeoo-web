@@ -35,6 +35,7 @@ const Home = ({ word }: HomeProps) => {
           </S.Footer>
         </S.Wrapper>
       </KeyboardProvider>
+      <Modal />
     </>
   );
 };

@@ -9,16 +9,6 @@ type BoardProps = {
 
 const Board = ({ word }: BoardProps) => {
   const { attemptValues, control, states, stats } = useData();
-  const [open, setOpen] = useState(false);
-
-  const closeModal = () => setOpen(false);
-  const openModal = () => setOpen(true);
-
-  useEffect(() => {
-    if (control?.over) {
-      openModal();
-    }
-  }, [control]);
 
   return (
     <>
@@ -31,14 +21,6 @@ const Board = ({ word }: BoardProps) => {
           word={word}
         />
       ))}
-
-      <Modal
-        children={<p>a</p>}
-        open={open}
-        closeModal={closeModal}
-        stats={stats}
-        win={control.win}
-      />
     </>
   );
 };
