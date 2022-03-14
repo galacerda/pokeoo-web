@@ -3,6 +3,8 @@ import { useData } from '../../providers/data';
 import Modal from '../Modal';
 import TableLetters from '../TableLetters';
 import { v4 as uuid } from 'uuid';
+import { MessageType, useSnackbar } from '../../providers/snackbar';
+import * as S from './styled';
 
 type BoardProps = {
   word: string[];
@@ -10,9 +12,22 @@ type BoardProps = {
 
 const Board = ({ word }: BoardProps) => {
   const { attemptValues, control, states, stats } = useData();
+  const { setMessages } = useSnackbar();
+
+  useEffect(() => {
+    if (!word?.length) {
+      setMessages((prevState: MessageType[]) => [
+        ...prevState,
+        {
+          key: uuid(),
+          message: 'O pokemon do dia ainda não foi capturado!',
+        },
+      ]);
+    }
+  }, []);
 
   return (
-    <>
+    <S.Wrapper>
       {states.map((state: string, index: number) => (
         <TableLetters
           key={uuid()}
@@ -22,7 +37,7 @@ const Board = ({ word }: BoardProps) => {
           word={word}
         />
       ))}
-    </>
+    </S.Wrapper>
   );
 };
 

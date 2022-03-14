@@ -8,6 +8,8 @@ import { pokemons } from '../../utils/constants/pokemons';
 import { useData } from '../../providers/data';
 import Board from '../../components/Board';
 import { KeyboardProvider } from '../../providers/keyboard';
+import { MessageType, useSnackbar } from '../../providers/snackbar';
+import { v4 as uuid } from 'uuid';
 
 const pokemonsNames = pokemons.map(({ name }) => name.toUpperCase());
 

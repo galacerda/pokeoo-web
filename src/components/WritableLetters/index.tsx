@@ -21,11 +21,18 @@ const messages = {
 const WritableLetters = ({ index, word }: WritableLettersProps) => {
   const { letter, setLetter } = useKeyboard();
   const { setMessages } = useSnackbar();
-
   const { setAttemptValues, setStats, setControl, setStates } = useData();
   const [values, setValues] = useState<string[]>([]);
-  const [activeLetter, setActiveLetter] = useState(0);
+  const [activeLetter, setActiveLetter] = useState<number>(-1);
   const [key, setKey] = useState('');
+  const [disabled, setDisabled] = useState(false);
+
+  useEffect(() => {
+    if (word?.length) {
+      return setActiveLetter(0);
+    }
+    setDisabled(true);
+  }, []);
 
   useEffect(() => {
     window.addEventListener('keyup', (e) => {
@@ -154,13 +161,12 @@ const WritableLetters = ({ index, word }: WritableLettersProps) => {
 
   useEffect(() => {
     setKey('');
-    handleChange(key);
+    word?.length && handleChange(key);
   }, [key]);
 
   useEffect(() => {
-    console.log('entrou aqui');
     setLetter('');
-    handleChange(letter);
+    word?.length && handleChange(letter);
   }, [letter]);
 
   return (
@@ -168,8 +174,9 @@ const WritableLetters = ({ index, word }: WritableLettersProps) => {
       {new Array(7).fill('').map((_, index) => (
         <S.Letter
           key={uuid()}
-          isFocus={index === activeLetter}
+          isFocus={index === activeLetter && !disabled}
           onClick={() => setActiveLetter(index)}
+          disabled={disabled}
         >
           <span>{values[index]}</span>
         </S.Letter>

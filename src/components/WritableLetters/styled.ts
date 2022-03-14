@@ -4,10 +4,11 @@ import { defaultTheme } from '../../styles/defaultTheme';
 
 type LetterType = {
   isFocus: boolean;
+  disabled: boolean;
 };
 
 export const Letter = styled.div<LetterType>`
-  ${({ isFocus }) => css`
+  ${({ isFocus, disabled }) => css`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,6 +35,11 @@ export const Letter = styled.div<LetterType>`
       outline: none;
       border-bottom: 1rem solid
         ${transparentize(0.5, defaultTheme.colors.yellow)};
+    `}
+    ${disabled &&
+    css`
+      opacity: 0.9;
+      cursor: not-allowed;
     `}
   `}
 `;

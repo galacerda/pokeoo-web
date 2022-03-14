@@ -2,6 +2,8 @@ import AttemptLetters, { AttemptLettersType } from '../AttemptLetters';
 import WritableLetters from '../WritableLetters';
 import { v4 as uuid } from 'uuid';
 import * as S from './styled';
+import { useEffect, useState } from 'react';
+import { MessageType, useSnackbar } from '../../providers/snackbar';
 
 type LettersProps = {
   state: string;

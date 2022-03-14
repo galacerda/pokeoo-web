@@ -1,14 +1,25 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
+import { useData } from '../../providers/data';
 import { useKeyboard } from '../../providers/keyboard';
 import { keysGroup } from '../../utils/constants/keys';
+import { AttemptLettersType } from '../AttemptLetters';
 import * as S from './styled';
 
 const enter = '/img/enter.svg';
 const backspace = '/img/backspace.svg';
 
 const Keyboard = () => {
+  const { attemptValues } = useData();
   const { setLetter } = useKeyboard();
-
+  console.log(attemptValues, 'attemptValues');
+  useEffect(() => {
+    if (attemptValues?.length) {
+      const a: AttemptLettersType[] = attemptValues.flatMap(
+        (item: AttemptLettersType) => item
+      );
+      const b = a.filter((item, index) => a.indexOf(item) === index);
+    }
+  }, [attemptValues]);
   const renderNameKey = (key: string) => {
     if (key === 'Enter') {
       return <img src={enter} />;
