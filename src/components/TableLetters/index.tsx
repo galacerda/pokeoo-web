@@ -2,8 +2,6 @@ import AttemptLetters, { AttemptLettersType } from '../AttemptLetters';
 import WritableLetters from '../WritableLetters';
 import { v4 as uuid } from 'uuid';
 import * as S from './styled';
-import { useEffect, useState } from 'react';
-import { MessageType, useSnackbar } from '../../providers/snackbar';
 
 type LettersProps = {
   state: string;
@@ -17,7 +15,7 @@ const TableLetters = ({ state, attemptValue, index, word }: LettersProps) => {
     <S.Wrapper>
       {state === 'hidden' && (
         <>
-          {new Array(7).fill('').map((_, index) => (
+          {new Array(7).fill('').map(() => (
             <S.LetterBox key={uuid()} />
           ))}
         </>

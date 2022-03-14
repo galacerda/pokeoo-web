@@ -1,8 +1,5 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { AttemptLettersType } from '../components/AttemptLetters';
+import { createContext, useContext, useState } from 'react';
 import SnackbarContainer from '../components/SnackbarContainer';
-import { setItemsAtLocalStorage } from '../utils/functions/setItemnsAtLocalStorage';
-import { startEndTime } from '../utils/functions/startEndTime';
 
 export const SnackbarContext = createContext({});
 

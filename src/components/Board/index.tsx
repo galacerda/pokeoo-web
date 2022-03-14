@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useData } from '../../providers/data';
-import Modal from '../Modal';
 import TableLetters from '../TableLetters';
 import { v4 as uuid } from 'uuid';
 import { MessageType, useSnackbar } from '../../providers/snackbar';
@@ -11,7 +10,7 @@ type BoardProps = {
 };
 
 const Board = ({ word }: BoardProps) => {
-  const { attemptValues, control, states, stats } = useData();
+  const { attemptValues, states } = useData();
   const { setMessages } = useSnackbar();
 
   useEffect(() => {

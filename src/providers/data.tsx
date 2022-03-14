@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { AttemptLettersType } from '../components/AttemptLetters';
 import { setItemsAtLocalStorage } from '../utils/functions/setItemnsAtLocalStorage';
-import { startEndTime } from '../utils/functions/startEndTime';
 
 export const DataContext = createContext({});
 

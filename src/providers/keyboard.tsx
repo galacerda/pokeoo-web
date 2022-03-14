@@ -1,7 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { AttemptLettersType } from '../components/AttemptLetters';
-import { setItemsAtLocalStorage } from '../utils/functions/setItemnsAtLocalStorage';
-import { startEndTime } from '../utils/functions/startEndTime';
+import { createContext, useContext, useState } from 'react';
 
 export const KeyboardContext = createContext({});
 

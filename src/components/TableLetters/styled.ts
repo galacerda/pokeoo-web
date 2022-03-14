@@ -1,5 +1,5 @@
 import { transparentize } from 'polished';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { defaultTheme } from '../../styles/defaultTheme';
 
 export const Wrapper = styled.div`

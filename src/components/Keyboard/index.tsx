@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useData } from '../../providers/data';
 import { useKeyboard } from '../../providers/keyboard';
 import { keysGroup } from '../../utils/constants/keys';
@@ -11,7 +11,6 @@ const backspace = '/img/backspace.svg';
 const Keyboard = () => {
   const { attemptValues } = useData();
   const { setLetter } = useKeyboard();
-  console.log(attemptValues, 'attemptValues');
   useEffect(() => {
     if (attemptValues?.length) {
       const a: AttemptLettersType[] = attemptValues.flatMap(
