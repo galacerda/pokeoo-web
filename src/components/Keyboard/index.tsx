@@ -1,15 +1,14 @@
 import { Dispatch, SetStateAction } from 'react';
+import { useKeyboard } from '../../providers/keyboard';
 import { keysGroup } from '../../utils/constants/keys';
 import * as S from './styled';
-
-type KeyProps = {
-  setTest: Dispatch<SetStateAction<string>>;
-};
 
 const enter = '/img/enter.svg';
 const backspace = '/img/backspace.svg';
 
-const Keyboard = ({ setTest }: KeyProps) => {
+const Keyboard = () => {
+  const { setLetter, letter } = useKeyboard();
+  console.log(letter, 'pimba');
   const renderNameKey = (key: string) => {
     if (key === 'Enter') {
       return <img src={enter} />;
@@ -26,7 +25,7 @@ const Keyboard = ({ setTest }: KeyProps) => {
         <S.Line isSecondLine={index === 1} key={index}>
           {keyGroup.map((key) => {
             return (
-              <S.Box key={key} onClick={() => setTest(key)}>
+              <S.Box key={key} onClick={() => setLetter(key)}>
                 {renderNameKey(key)}
               </S.Box>
             );

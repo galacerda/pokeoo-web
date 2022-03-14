@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, useRef, useState } from 'react';
+import { KeyboardProvider } from '../../providers/keyboard';
 import AttemptLetters, { AttemptLettersType } from '../AttemptLetters';
 import WritableLetters from '../WritableLetters';
 import * as S from './styled';
@@ -6,25 +7,11 @@ import * as S from './styled';
 type LettersProps = {
   state: string;
   attemptValue: AttemptLettersType[];
-  setAttemptValues: Dispatch<SetStateAction<AttemptLettersType[][]>>;
   index: number;
-  values: string[];
-  setValues: Dispatch<SetStateAction<string[]>>;
-  verifyLetters: (index: number) => void;
-  test: string;
-  setTest: Dispatch<SetStateAction<string>>;
+  word: string[];
 };
 
-const TableLetters = ({
-  state,
-  attemptValue,
-  index,
-  values,
-  setValues,
-  verifyLetters,
-  test,
-  setTest,
-}: LettersProps) => {
+const TableLetters = ({ state, attemptValue, index, word }: LettersProps) => {
   return (
     <S.Wrapper>
       {state === 'hidden' && (
@@ -34,16 +21,7 @@ const TableLetters = ({
           ))}
         </>
       )}
-      {state === 'writable' && (
-        <WritableLetters
-          index={index}
-          values={values}
-          setValues={setValues}
-          verifyLetters={verifyLetters}
-          test={test}
-          setTest={setTest}
-        />
-      )}
+      {state === 'writable' && <WritableLetters index={index} word={word} />}
       {state === 'attempt' && <AttemptLetters attemptLetters={attemptValue} />}
     </S.Wrapper>
   );
