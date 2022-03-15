@@ -19,24 +19,23 @@ const Keyboard = () => {
       const b = a.filter((item, index) => a.indexOf(item) === index);
     }
   }, [attemptValues]);
-  const renderNameKey = (key: string) => {
-    if (key === 'Enter') {
-      return <img src={enter} />;
-    }
-    if (key === 'Backspace') {
-      return <img src={backspace} />;
-    }
 
-    return <>{key}</>;
-  };
   return (
     <S.Keyboard>
+      <S.Actions>
+        <S.Box large={true} onClick={() => setLetter('Backspace')}>
+          <S.BackspaceImage />
+        </S.Box>
+        <S.Box large={true} onClick={() => setLetter('Enter')}>
+          <S.CheckImage />
+        </S.Box>
+      </S.Actions>
       {keysGroup.map((keyGroup, index) => (
         <S.Line isSecondLine={index === 1} key={index}>
           {keyGroup.map((key) => {
             return (
               <S.Box key={key} onClick={() => setLetter(key)}>
-                {renderNameKey(key)}
+                <>{key}</>
               </S.Box>
             );
           })}

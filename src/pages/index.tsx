@@ -1,4 +1,3 @@
-import { GetStaticProps } from 'next';
 import { DataProvider } from '../providers/data';
 import { SnackbarProvider } from '../providers/snackbar';
 import { getPokemonOfDay } from '../services/pokemons';
@@ -18,7 +17,7 @@ const Home = ({ pokemonOfTheDay }: HomeProps) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps = async () => {
   let pokemonOfTheDay = '';
 
   const response = await getPokemonOfDay();

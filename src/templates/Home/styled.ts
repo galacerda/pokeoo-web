@@ -15,7 +15,7 @@ export const Main = styled.main``;
 export const Title = styled.h1`
   font-size: 3rem;
   color: ${defaultTheme.colors.yellow};
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
 `;
 
 export const Footer = styled.footer`

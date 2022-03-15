@@ -2,7 +2,7 @@ import * as S from './styled';
 import { useTransition } from 'react-spring';
 import Snackbar from '../Snackbar';
 import { MessageType } from '../../providers/snackbar';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 
 type SnackbarContainerProps = {
   messages: MessageType[];
