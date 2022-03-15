@@ -13,21 +13,9 @@ type StatsWrapperType = {
 const containerModifiers = {
   open: () => css`
     opacity: 1;
-    width: 70rem;
-    height: 50rem;
-    background: ${transparentize(0.05, '#111547')};
-    border-radius: 1rem;
-    transition: all linear 0.2s;
-    @media (max-width: 700px) {
-      width: 40rem;
-      height: fit-content;
-      padding: 3rem 2rem;
-    }
   `,
   close: () => css`
     opacity: 0;
-    margin-top: 0;
-    transition: all linear 0.2s;
   `,
 };
 
@@ -71,6 +59,18 @@ export const Container = styled.div<ElementWithOpenType>`
     padding: 3rem;
     text-align: center;
     z-index: 1;
+    width: 70rem;
+    height: 50rem;
+    background: ${transparentize(0.05, '#111547')};
+    border-radius: 1rem;
+    transition: all linear 0.2s;
+    margin-top: 0;
+    transition: all linear 0.2s;
+    @media (max-width: 700px) {
+      width: 40rem;
+      height: fit-content;
+      padding: 3rem 2rem;
+    }
     ${open && containerModifiers.open}
     ${!open && containerModifiers.close}
   `}

@@ -1,4 +1,5 @@
 import * as S from './styled';
+import { v4 as uuid } from 'uuid';
 
 export type AttemptLettersType = {
   letter: string;
@@ -12,8 +13,8 @@ type AttemptLettersProps = {
 const AttemptLetters = ({ attemptLetters }: AttemptLettersProps) => {
   return (
     <>
-      {attemptLetters.map(({ letter, status }, index) => (
-        <S.Letter status={status} key={index}>
+      {attemptLetters.map(({ letter, status }) => (
+        <S.Letter status={status} key={uuid()}>
           <span>{letter}</span>
         </S.Letter>
       ))}

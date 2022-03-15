@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useData } from '../../providers/data';
+import { v4 as uuid } from 'uuid';
 import * as S from './styled';
 
 const Modal = () => {
@@ -25,7 +26,7 @@ const Modal = () => {
         <S.StatsContainer>
           {stats?.map(
             (item: { title: string; data: string }, index: number) => (
-              <S.StatsWrapper key={item.title} isSecond={index === 1}>
+              <S.StatsWrapper key={uuid()} isSecond={index === 1}>
                 <S.Title>{item.title}</S.Title>
                 <S.Data>{item.data}</S.Data>
               </S.StatsWrapper>

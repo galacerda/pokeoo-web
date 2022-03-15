@@ -3,6 +3,7 @@ import { useData } from '../../providers/data';
 import { useKeyboard } from '../../providers/keyboard';
 import { pokemons } from '../../utils/constants/pokemons';
 import { AttemptLettersType } from '../AttemptLetters';
+import { v4 as uuid } from 'uuid';
 import * as S from './styled';
 
 const pokemonsNames = pokemons.map(({ name }) => name.toUpperCase());
@@ -155,7 +156,7 @@ const WritableLetters = ({ index, word }: WritableLettersProps) => {
     <>
       {new Array(7).fill('').map((_, index) => (
         <S.Letter
-          key={index}
+          key={uuid()}
           isFocus={index === activeLetter}
           onClick={() => setActiveLetter(index)}
         >

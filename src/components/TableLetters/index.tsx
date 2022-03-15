@@ -1,5 +1,6 @@
 import AttemptLetters, { AttemptLettersType } from '../AttemptLetters';
 import WritableLetters from '../WritableLetters';
+import { v4 as uuid } from 'uuid';
 import * as S from './styled';
 
 type LettersProps = {
@@ -15,7 +16,7 @@ const TableLetters = ({ state, attemptValue, index, word }: LettersProps) => {
       {state === 'hidden' && (
         <>
           {new Array(7).fill('').map((_, index) => (
-            <S.LetterBox key={index} />
+            <S.LetterBox key={uuid()} />
           ))}
         </>
       )}
