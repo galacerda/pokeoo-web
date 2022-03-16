@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { AttemptLettersType } from '../components/AttemptLetters';
-import { setItemsAtLocalStorage } from '../utils/functions/setItemnsAtLocalStorage';
 
 export const DataContext = createContext({});
 
@@ -24,36 +23,9 @@ const DataProvider = ({ children }: DataProvider) => {
     { title: 'melhor sequência', data: 0 },
   ]);
   const [control, setControl] = useState<any>({ over: false, win: false });
-  const [data, setData] = useState<any>(null);
   const [attemptValues, setAttemptValues] = useState<AttemptLettersType[][]>(
     []
   );
-
-  const [firstRender, setFirstRender] = useState(true);
-
-  useEffect(() => {
-    const dataLocalStorage = localStorage.getItem('data');
-
-    if (dataLocalStorage) {
-      const dataLocalStorageParsed = JSON.parse(dataLocalStorage as string);
-      const { end } = dataLocalStorageParsed.time;
-
-      if (Date.now() >= end) {
-        setItemsAtLocalStorage(attemptValues, states, control, stats);
-      } else {
-        setAttemptValues(dataLocalStorageParsed.attemptValues);
-        setStates(dataLocalStorageParsed.states);
-        setControl(dataLocalStorageParsed.control);
-        setStats(dataLocalStorageParsed.stats);
-      }
-    } else setItemsAtLocalStorage(attemptValues, states, control, stats);
-  }, []);
-
-  useEffect(() => {
-    if (!firstRender) {
-      setItemsAtLocalStorage(attemptValues, states, control, stats);
-    } else setFirstRender(false);
-  }, [attemptValues, states, control, stats]);
 
   return (
     <DataContext.Provider

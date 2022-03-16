@@ -31,7 +31,6 @@ export const Box = styled.div<BoxType>`
     border-radius: 0.5rem;
     border: none;
     background: ${transparentize(0.5, defaultTheme.colors.blue)};
-    font-family: 'Poppins';
     font-weight: 700;
     font-size: 3rem;
     cursor: pointer;

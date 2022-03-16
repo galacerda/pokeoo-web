@@ -20,7 +20,7 @@ const messages = {
 };
 const WritableLetters = ({ index, word }: WritableLettersProps) => {
   const { letter, setLetter } = useKeyboard();
-  const { setMessages } = useSnackbar();
+  const { showMessage } = useSnackbar();
   const { setAttemptValues, setStats, setControl, setStates } = useData();
   const [values, setValues] = useState<string[]>([]);
   const [activeLetter, setActiveLetter] = useState<number>(-1);
@@ -54,11 +54,7 @@ const WritableLetters = ({ index, word }: WritableLettersProps) => {
     if (!pokemonsNames.includes(values.join(''))) {
       setActiveLetter(0);
       const message = values?.length ? messages.inexistent : messages.empty;
-
-      return setMessages((prevState: MessageType[]) => [
-        ...prevState,
-        { message: message, key: uuid() },
-      ]);
+      return showMessage(message);
     }
 
     const attempt: AttemptLettersType[] = [];

@@ -1,5 +1,6 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useCallback, useContext, useState } from 'react';
 import SnackbarContainer from '../components/SnackbarContainer';
+import { v4 as uuid } from 'uuid';
 
 export const SnackbarContext = createContext({});
 
@@ -9,21 +10,28 @@ type ProviderProps = {
 
 export type MessageType = {
   message: string;
-  key: number;
+  key: string;
 };
 
 const SnackbarProvider = ({ children }: ProviderProps) => {
-  const [messages, setMessages] = useState<MessageType[]>([]);
+  const [message, setMessage] = useState<string | null>(null);
+
+  const showMessage = useCallback((message: string) => {
+    setMessage(message);
+  }, []);
+
+  const hideMessage = useCallback(() => {
+    setMessage(null);
+  }, []);
 
   return (
     <SnackbarContext.Provider
       value={{
-        messages,
-        setMessages,
+        showMessage,
       }}
     >
       {children}
-      <SnackbarContainer messages={messages} setMessages={setMessages} />
+      <SnackbarContainer message={message} hideMessage={hideMessage} />
     </SnackbarContext.Provider>
   );
 };

@@ -9,18 +9,16 @@ type HomeProps = {
 
 const Home = ({ pokemonOfTheDay }: HomeProps) => {
   return (
-    <DataProvider>
-      <SnackbarProvider>
-        <Template word={pokemonOfTheDay.toUpperCase().split('')} />
-      </SnackbarProvider>
-    </DataProvider>
+    <SnackbarProvider>
+      <Template word={pokemonOfTheDay.toUpperCase().split('')} />
+    </SnackbarProvider>
   );
 };
 
 export const getServerSideProps = async () => {
   let pokemonOfTheDay = '';
 
-  const response = await getPokemonOfDay();
+  const response = { data: 'MACHAMP' };
   if (response) {
     pokemonOfTheDay = response.data;
   }

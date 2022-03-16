@@ -3,8 +3,13 @@ import { useData } from '../../providers/data';
 import { v4 as uuid } from 'uuid';
 import * as S from './styled';
 
-const Modal = () => {
+type ModalProps = {
+  word: string[];
+};
+
+const Modal = ({ word }: ModalProps) => {
   const { stats, control } = useData();
+  console.log(control);
   const [open, setOpen] = useState(false);
 
   const closeModal = () => setOpen(false);
@@ -18,11 +23,16 @@ const Modal = () => {
 
   const feedbackText = control?.win
     ? 'você acertou, parabéns!!'
-    : 'você não acertou, que pena!!';
+    : `você não acertou, que pena!!`;
   return (
     <S.Wrapper open={open}>
       <S.Container open={open}>
         <S.Feedback>{feedbackText}</S.Feedback>
+        {!control?.win && (
+          <S.Feedback>
+            O pokemon de hoje é: <strong>{word.join('')}</strong>
+          </S.Feedback>
+        )}
         <S.StatsContainer>
           {stats?.map(
             (item: { title: string; data: string }, index: number) => (

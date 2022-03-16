@@ -29,7 +29,6 @@ export const Letter = styled.div<LetterType>`
     border-radius: 10%;
     text-align: center;
     font-size: 3.7rem;
-    font-family: 'Poppins';
     font-weight: 700;
     outline: none;
     color: ${defaultTheme.colors.white};
