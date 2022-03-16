@@ -18,7 +18,7 @@ const Home = ({ pokemonOfTheDay }: HomeProps) => {
 export const getServerSideProps = async () => {
   let pokemonOfTheDay = '';
 
-  const response = { data: 'MACHAMP' };
+  const response = await getPokemonOfDay();
   if (response) {
     pokemonOfTheDay = response.data;
   }
