@@ -9,7 +9,6 @@ type ModalProps = {
 
 const Modal = ({ word }: ModalProps) => {
   const { stats, control } = useData();
-  console.log(control);
   const [open, setOpen] = useState(false);
 
   const closeModal = () => setOpen(false);
