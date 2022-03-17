@@ -23,4 +23,9 @@ export const Title = styled.h1`
   padding: 1rem;
 `;
 
-export const Footer = styled.footer``;
+export const Footer = styled.footer`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;

@@ -5,6 +5,7 @@ import { pokemons } from '../../utils/constants/pokemons';
 import { AttemptLettersType } from '../AttemptLetters';
 import { v4 as uuid } from 'uuid';
 import * as S from './styled';
+import { MessageType, useSnackbar } from '../../providers/snackbar';
 
 const pokemonsNames = pokemons.map(({ name }) => name.toUpperCase());
 
@@ -13,8 +14,13 @@ type WritableLettersProps = {
   word: string[];
 };
 
+const messages = {
+  empty: 'Esqueceu de inserir o pokemon?',
+  inexistent: 'Insira um pokemon válido',
+};
 const WritableLetters = ({ index, word }: WritableLettersProps) => {
   const { letter, setLetter } = useKeyboard();
+  const { setMessages } = useSnackbar();
 
   const { setAttemptValues, setStats, setControl, setStates } = useData();
   const [values, setValues] = useState<string[]>([]);
@@ -40,7 +46,12 @@ const WritableLetters = ({ index, word }: WritableLettersProps) => {
 
     if (!pokemonsNames.includes(values.join(''))) {
       setActiveLetter(0);
-      return window.alert('para ai');
+      const message = values?.length ? messages.inexistent : messages.empty;
+
+      return setMessages((prevState: MessageType[]) => [
+        ...prevState,
+        { message: message, key: uuid() },
+      ]);
     }
 
     const attempt: AttemptLettersType[] = [];

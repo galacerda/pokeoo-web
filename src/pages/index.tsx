@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import client from '../graphql/client';
 import GET_POKEMONS from '../graphql/queries/getPokemons';
 import { DataProvider } from '../providers/data';
+import { SnackbarProvider } from '../providers/snackbar';
 import Template from '../templates/Home';
 import { pokemons } from '../utils/constants/pokemons';
 import { startEndTime } from '../utils/functions/startEndTime';
@@ -20,7 +21,9 @@ const Home = ({ pokemonOfTheDay }: HomeProps) => {
   };
   return (
     <DataProvider>
-      <Template word={pokemonOfTheDay.toUpperCase().split('')} />
+      <SnackbarProvider>
+        <Template word={pokemonOfTheDay.toUpperCase().split('')} />
+      </SnackbarProvider>
     </DataProvider>
   );
 };

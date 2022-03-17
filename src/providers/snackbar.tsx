@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { AttemptLettersType } from '../components/AttemptLetters';
+import SnackbarContainer from '../components/SnackbarContainer';
 import { setItemsAtLocalStorage } from '../utils/functions/setItemnsAtLocalStorage';
 import { startEndTime } from '../utils/functions/startEndTime';
 
@@ -9,19 +10,23 @@ type ProviderProps = {
   children: React.ReactNode;
 };
 
-const SnackbarProvider = ({ children }: ProviderProps) => {
-  const [messages, setMessages] = useState();
+export type MessageType = {
+  message: string;
+  key: number;
+};
 
-  useEffect(() => {});
+const SnackbarProvider = ({ children }: ProviderProps) => {
+  const [messages, setMessages] = useState<MessageType[]>([]);
 
   return (
     <SnackbarContext.Provider
       value={{
-        letter,
-        setLetter,
+        messages,
+        setMessages,
       }}
     >
       {children}
+      <SnackbarContainer messages={messages} setMessages={setMessages} />
     </SnackbarContext.Provider>
   );
 };
