@@ -36,7 +36,7 @@ export const Letter = styled.div<LetterType>`
     @media (max-width: 700px) {
       width: 4.5rem;
       height: 4.5rem;
-      font-size: 2.7rem;
+      font-size: 2.4rem;
     }
   `}
 `;

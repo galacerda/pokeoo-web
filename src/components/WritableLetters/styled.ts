@@ -27,13 +27,17 @@ export const Letter = styled.div<LetterType>`
     @media (max-width: 700px) {
       width: 4.5rem;
       height: 4.5rem;
-      font-size: 2.7rem;
+      font-size: 2.4rem;
     }
     ${isFocus &&
     css`
       outline: none;
       border-bottom: 1rem solid
         ${transparentize(0.5, defaultTheme.colors.yellow)};
+      @media (max-width: 700px) {
+        border-bottom: 0.7rem solid
+          ${transparentize(0.5, defaultTheme.colors.yellow)};
+      }
     `}
     ${disabled &&
     css`
