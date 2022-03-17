@@ -6,22 +6,15 @@ import { AttemptLettersType } from '../AttemptLetters';
 import { v4 as uuid } from 'uuid';
 import * as S from './styled';
 import { MessageType, useSnackbar } from '../../providers/snackbar';
-
-const pokemonsNames = pokemons.map(({ name }) => name.toUpperCase());
+import useVerify from '../../hooks/useVerify';
 
 type WritableLettersProps = {
   index: number;
   word: string[];
 };
 
-const messages = {
-  empty: 'Esqueceu de inserir o pokemon?',
-  inexistent: 'Insira um pokemon válido',
-};
 const WritableLetters = ({ index, word }: WritableLettersProps) => {
   const { letter, setLetter } = useKeyboard();
-  const { showMessage } = useSnackbar();
-  const { setAttemptValues, setStats, setControl, setStates } = useData();
   const [values, setValues] = useState<string[]>([]);
   const [activeLetter, setActiveLetter] = useState<number>(-1);
   const [key, setKey] = useState('');
@@ -32,7 +25,7 @@ const WritableLetters = ({ index, word }: WritableLettersProps) => {
       return setActiveLetter(0);
     }
     setDisabled(true);
-  }, []);
+  }, [word, setActiveLetter, setDisabled]);
 
   useEffect(() => {
     window.addEventListener('keyup', (e) => {
@@ -44,85 +37,12 @@ const WritableLetters = ({ index, word }: WritableLettersProps) => {
         setKey('');
       });
     };
-  }, []);
+  }, [setKey]);
 
-  const verifyLetters = (index: number) => {
-    setValues([]);
-    let isOver = false;
-    let decrementIndex = 0;
-
-    if (!pokemonsNames.includes(values.join(''))) {
-      setActiveLetter(0);
-      const message = values?.length ? messages.inexistent : messages.empty;
-      return showMessage(message);
-    }
-
-    const attempt: AttemptLettersType[] = [];
-
-    const copyWord = [...word];
-
-    values.forEach((letterValue, index) => {
-      let status = 'nonexist';
-      index = index - decrementIndex;
-      if (copyWord.includes(letterValue)) {
-        if (copyWord.indexOf(letterValue) === index) {
-          status = 'right';
-        } else {
-          status = 'exist';
-        }
-        copyWord.splice(copyWord.indexOf(letterValue), 1);
-        decrementIndex += 1;
-      }
-      attempt.push({ letter: letterValue, status });
-    });
-
-    setAttemptValues((prevState: any) => {
-      const copy = [...prevState];
-      copy.push(attempt);
-      return copy;
-    });
-
-    if (values.join('') === word.join('')) {
-      setStats((prevState: any) => {
-        const games = { ...prevState[0] };
-        const wins = { ...prevState[1] };
-        const bestSequence = { ...prevState[2] };
-        wins.data += 1;
-        games.data += 1;
-        if (wins.data > bestSequence.data) {
-          bestSequence.data = wins.data;
-        }
-        return [games, wins, bestSequence];
-      });
-      setControl({ over: true, win: true });
-      isOver = true;
-    }
-
-    if (index === 6) {
-      setStats((prevState: any) => {
-        const games = { ...prevState[0] };
-        const wins = { ...prevState[1] };
-        const bestSequence = { ...prevState[2] };
-        wins.data = 0;
-        games.data += 1;
-        return [games, wins, bestSequence];
-      });
-      setControl({ over: true, win: false });
-      isOver = true;
-    }
-
-    setStates((prevState: any) => {
-      const copy = [...prevState];
-      copy[index] = 'attempt';
-      if (!isOver) {
-        copy[index + 1] = 'writable';
-      }
-      return copy;
-    });
-  };
+  const verifyLetters = useVerify();
 
   const handleChange = useCallback(
-    (value) => {
+    (value, actualValues) => {
       if (/[a-z]/i.test(value) && value?.length === 1) {
         setValues((prevState) => {
           const copy = [...prevState];
@@ -150,19 +70,20 @@ const WritableLetters = ({ index, word }: WritableLettersProps) => {
         setActiveLetter(activeLetter + 1);
       if (value === 'ArrowLeft' && activeLetter > 0)
         setActiveLetter(activeLetter - 1);
-      if (value === 'Enter') verifyLetters(index);
+      if (value === 'Enter')
+        verifyLetters(index, actualValues, setValues, word);
     },
     [activeLetter, setActiveLetter, verifyLetters, setValues]
   );
 
   useEffect(() => {
     setKey('');
-    word?.length && handleChange(key);
+    word?.length && handleChange(key, values);
   }, [key]);
 
   useEffect(() => {
     setLetter('');
-    word?.length && handleChange(letter);
+    word?.length && handleChange(letter, values);
   }, [letter]);
 
   return (

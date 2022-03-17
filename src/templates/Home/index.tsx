@@ -5,6 +5,8 @@ import Keyboard from '../../components/Keyboard';
 import Board from '../../components/Board';
 import { KeyboardProvider } from '../../providers/keyboard';
 import { DataProvider } from '../../providers/data';
+import { useEffect } from 'react';
+import { useSnackbar } from '../../providers/snackbar';
 
 type DataType = {
   attemps: AttemptLettersType[][];

@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { SnackbarProvider } from '../providers/snackbar';
 import GlobalStyles from '../styles/global';
 
 function App({ Component, pageProps }: AppProps) {
@@ -9,7 +10,9 @@ function App({ Component, pageProps }: AppProps) {
         <title>Pokeoo</title>
       </Head>
       <GlobalStyles />
-      <Component {...pageProps} />
+      <SnackbarProvider>
+        <Component {...pageProps} />
+      </SnackbarProvider>
     </>
   );
 }

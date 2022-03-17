@@ -22,13 +22,8 @@ const Board = ({ word }: BoardProps) => {
     stats,
     setStats,
   } = useData();
-  const { showMessage } = useSnackbar();
 
   useEffect(() => {
-    if (!word?.length) {
-      showMessage('O pokemon do dia ainda não foi capturado!');
-    }
-
     const dataLocalStorage = localStorage.getItem('data');
 
     if (dataLocalStorage) {

@@ -1,4 +1,3 @@
-import { DataProvider } from '../providers/data';
 import { SnackbarProvider } from '../providers/snackbar';
 import { getPokemonOfDay } from '../services/pokemons';
 import Template from '../templates/Home';

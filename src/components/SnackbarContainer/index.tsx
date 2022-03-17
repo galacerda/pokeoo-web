@@ -12,18 +12,11 @@ const SnackbarContainer = ({
   message,
   hideMessage,
 }: SnackbarContainerProps) => {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      hideMessage();
-    }, 900);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [message]);
-
   return (
     <S.Container>
-      <div>{!!message && <Snackbar message={message} />}</div>
+      <div>
+        {!!message && <Snackbar message={message} hideMessage={hideMessage} />}
+      </div>
     </S.Container>
   );
 };
