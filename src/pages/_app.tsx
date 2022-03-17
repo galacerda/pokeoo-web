@@ -8,6 +8,13 @@ function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Pokeoo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="POKEO - todo dia um pokemon novo para ser descoberto!"
+        />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
       </Head>
       <GlobalStyles />
       <SnackbarProvider>
