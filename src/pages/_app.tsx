@@ -13,6 +13,10 @@ function App({ Component, pageProps }: AppProps) {
           name="description"
           content="POKEO - todo dia um pokemon novo para ser descoberto!"
         />
+        <meta
+          name="google-site-verification"
+          content="yIo-HeruajKCLed_nQnJSwEIETTmuV9Rka3JUV5zrCA"
+        />
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon.ico" />
       </Head>
