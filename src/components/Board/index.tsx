@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useData } from '../../providers/data';
 import TableLetters from '../TableLetters';
 import { v4 as uuid } from 'uuid';
-import { MessageType, useSnackbar } from '../../providers/snackbar';
 import * as S from './styled';
 import { setItemsAtLocalStorage } from '../../utils/functions/setItemnsAtLocalStorage';
 
@@ -31,13 +30,18 @@ const Board = ({ word }: BoardProps) => {
       const { end } = dataLocalStorageParsed.time;
 
       if (Date.now() >= end) {
-        setItemsAtLocalStorage(attemptValues, states, control, stats);
+        setItemsAtLocalStorage(
+          attemptValues,
+          states,
+          control,
+          dataLocalStorageParsed?.stats || stats
+        );
       } else {
         setAttemptValues(dataLocalStorageParsed.attemptValues);
         setStates(dataLocalStorageParsed.states);
         setControl(dataLocalStorageParsed.control);
-        setStats(dataLocalStorageParsed.stats);
       }
+      dataLocalStorageParsed?.stats && setStats(dataLocalStorageParsed.stats);
     } else setItemsAtLocalStorage(attemptValues, states, control, stats);
   }, []);
 
@@ -55,6 +59,7 @@ const Board = ({ word }: BoardProps) => {
           state={state}
           attemptValue={attemptValues[index]}
           index={index}
+          states={states}
           word={word}
         />
       ))}

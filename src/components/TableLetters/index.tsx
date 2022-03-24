@@ -8,9 +8,16 @@ type LettersProps = {
   attemptValue: AttemptLettersType[];
   index: number;
   word: string[];
+  states: string[];
 };
 
-const TableLetters = ({ state, attemptValue, index, word }: LettersProps) => {
+const TableLetters = ({
+  state,
+  attemptValue,
+  index,
+  word,
+  states,
+}: LettersProps) => {
   return (
     <S.Wrapper>
       {state === 'hidden' && (
@@ -21,7 +28,13 @@ const TableLetters = ({ state, attemptValue, index, word }: LettersProps) => {
         </>
       )}
       {state === 'writable' && <WritableLetters index={index} word={word} />}
-      {state === 'attempt' && <AttemptLetters attemptLetters={attemptValue} />}
+      {state === 'attempt' && (
+        <AttemptLetters
+          attemptLetters={attemptValue}
+          index={index}
+          actual={states.filter((state) => state === 'attempt').length}
+        />
+      )}
     </S.Wrapper>
   );
 };

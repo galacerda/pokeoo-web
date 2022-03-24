@@ -1,11 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useData } from '../../providers/data';
 import { useKeyboard } from '../../providers/keyboard';
-import { pokemons } from '../../utils/constants/pokemons';
-import { AttemptLettersType } from '../AttemptLetters';
 import { v4 as uuid } from 'uuid';
 import * as S from './styled';
-import { MessageType, useSnackbar } from '../../providers/snackbar';
 import useVerify from '../../hooks/useVerify';
 
 type WritableLettersProps = {

@@ -21,7 +21,6 @@ export const getServerSideProps = async () => {
   if (response) {
     pokemonOfTheDay = response.data;
   }
-
   return {
     props: { pokemonOfTheDay },
   };
