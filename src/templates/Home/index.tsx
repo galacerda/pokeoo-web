@@ -22,7 +22,7 @@ const Home = ({ word }: HomeProps) => {
         <KeyboardProvider>
           <S.Wrapper>
             <S.Header>
-              <Stats word={word} />
+              {/* <Stats word={word} /> */}
               <S.Title>POKEO</S.Title>
             </S.Header>
             <S.Main>
