@@ -9,7 +9,7 @@ type HomeProps = {
 const Home = ({ pokemonOfTheDay }: HomeProps) => {
   return (
     <SnackbarProvider>
-      <Template word={pokemonOfTheDay.toUpperCase().split('')} />
+        <Template word={pokemonOfTheDay.toUpperCase().split('')} />
     </SnackbarProvider>
   );
 };

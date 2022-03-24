@@ -5,8 +5,7 @@ import Keyboard from '../../components/Keyboard';
 import Board from '../../components/Board';
 import { KeyboardProvider } from '../../providers/keyboard';
 import { DataProvider } from '../../providers/data';
-import { useEffect } from 'react';
-import { useSnackbar } from '../../providers/snackbar';
+import Stats from '../../components/Stats';
 
 type DataType = {
   attemps: AttemptLettersType[][];
@@ -23,6 +22,7 @@ const Home = ({ word }: HomeProps) => {
         <KeyboardProvider>
           <S.Wrapper>
             <S.Header>
+              <Stats word={word} />
               <S.Title>POKEO</S.Title>
             </S.Header>
             <S.Main>
@@ -34,7 +34,7 @@ const Home = ({ word }: HomeProps) => {
           </S.Wrapper>
         </KeyboardProvider>
         <Modal word={word} />
-      </DataProvider>{' '}
+      </DataProvider>
     </>
   );
 };

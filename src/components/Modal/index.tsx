@@ -5,18 +5,26 @@ import * as S from './styled';
 
 type ModalProps = {
   word: string[];
+  openModal?: any;
+  closeModal?: any;
+  modalState?: boolean;
+  isModified?:boolean;
 };
 
-const Modal = ({ word }: ModalProps) => {
+const Modal = ({ word, openModal = null, closeModal = null, modalState = false, isModified = false }: ModalProps) => {
   const { stats, control } = useData();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(modalState);
 
-  const closeModal = () => setOpen(false);
-  const openModal = () => setOpen(true);
+  const closeModalOrigin = () => isModified ? closeModal() : setOpen(false) ;
+  const openModalOrigin = () => isModified ? openModal() : setOpen(true);
+
+  useEffect(()=>{
+    setOpen(modalState)
+  },[modalState])
 
   useEffect(() => {
-    if (control?.over) {
-      openModal();
+    if (control?.over && !isModified) {
+      openModalOrigin();
     }
   }, [control]);
 
@@ -42,8 +50,9 @@ const Modal = ({ word }: ModalProps) => {
             )
           )}
         </S.StatsContainer>
+        <p>Desenvolvido por Gabriel Lacerda</p>
       </S.Container>
-      <S.Overlay open={open} onClick={closeModal} />
+      <S.Overlay open={open} onClick={closeModalOrigin} />
     </S.Wrapper>
   );
 };

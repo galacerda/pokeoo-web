@@ -47,6 +47,7 @@ export const Overlay = styled.div<ElementWithOpenType>`
     width: 100%;
     height: 100%;
     top: 0;
+    left: 0;
     z-index: 0;
     ${open && wrapperModifiers.open};
   `}
@@ -66,6 +67,10 @@ export const Container = styled.div<ElementWithOpenType>`
     transition: all linear 0.2s;
     margin-top: 0;
     transition: all linear 0.2s;
+    p{
+      color: ${transparentize(0.3, defaultTheme.colors.white)};
+      font-size: 1rem;
+    }
     @media (max-width: 700px) {
       width: 40rem;
       height: fit-content;
