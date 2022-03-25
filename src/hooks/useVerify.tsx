@@ -18,23 +18,18 @@ export default function useVerify() {
 
       setValues([]);
       let isOver = false;
-      let decrementIndex = 0;
 
       const attempt: AttemptLettersType[] = [];
 
       const copyWord = [...word];
-
       values.forEach((letterValue, index) => {
         let status = 'nonexist';
-        index = index - decrementIndex;
         if (copyWord.includes(letterValue)) {
           if (copyWord.indexOf(letterValue) === index) {
             status = 'right';
           } else {
             status = 'exist';
           }
-          copyWord.splice(copyWord.indexOf(letterValue), 1);
-          decrementIndex += 1;
         }
         attempt.push({ letter: letterValue, status });
       });
