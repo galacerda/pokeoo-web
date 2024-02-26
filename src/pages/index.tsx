@@ -9,7 +9,7 @@ type HomeProps = {
 const Home = ({ pokemonOfTheDay }: HomeProps) => {
   return (
     <SnackbarProvider>
-        <Template word={pokemonOfTheDay.toUpperCase().split('')} />
+      <Template word={pokemonOfTheDay.toUpperCase().split('')} />
     </SnackbarProvider>
   );
 };
@@ -17,12 +17,12 @@ const Home = ({ pokemonOfTheDay }: HomeProps) => {
 export const getServerSideProps = async () => {
   let pokemonOfTheDay = '';
 
-  const response = await getPokemonOfDay();
-  if (response) {
-    pokemonOfTheDay = response.data;
-  }
+  // const response = await getPokemonOfDay();
+  // if (response) {
+  //   pokemonOfTheDay = response.data;
+  // }
   return {
-    props: { pokemonOfTheDay },
+    props: { pokemonOfTheDay: 'PIKACHU' },
   };
 };
 
