@@ -24,7 +24,7 @@ const AttemptLetters = ({
           <S.Letter
             status={status}
             key={uuid()}
-            isActual={index + 1 === actual}
+            isActual={index + 2 - 1 === actual}
           >
             <span>{letter}</span>
           </S.Letter>
